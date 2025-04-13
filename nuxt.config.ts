@@ -3,7 +3,15 @@ export default defineNuxtConfig({
   srcDir: 'src/',
   compatibilityDate: '2024-11-01',
   devtools: { enabled: true },
-  modules: ['@nuxt/eslint', '@nuxt/ui', '@nuxt/image', '@pinia/nuxt'],
+  modules: [
+    '@nuxt/eslint',
+    '@nuxt/ui',
+    '@nuxt/image',
+    '@pinia/nuxt',
+  ],
   css: ['~/assets/css/main.css'],
   ssr: true,
+  // extends:[
+  //       '~/layers/task-list'
+  //     ]
 })

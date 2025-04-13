@@ -1,17 +1,13 @@
 export const useNotification = () => {
   const toast = useToast()
 
-  interface IColor {
-    color: "neutral" | "primary" | "secondary" | "success" | "info" | "warning" | "error" | undefined
-  }
-
   const toastTemplate = (
     title: string,
     {
       color,
       icon,
       description
-    }: { color?: IColor['color']; icon?: string; description?: string } = {}
+    }: { color?: "neutral" | "primary" | "secondary" | "success" | "info" | "warning" | "error"; icon?: string; description?: string } = {}
   ) => {
     toast.add({ title, color, icon, description })
   }
