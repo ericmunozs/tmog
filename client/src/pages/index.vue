@@ -11,7 +11,6 @@
   const UButton = resolveComponent('UButton')
   
   const updateTask = (task: Task) => {
-    console.log("updateTask", task)
     navigateTo(`/tasks/${task.id}`)
   }
 
