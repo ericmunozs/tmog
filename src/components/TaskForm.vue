@@ -1,6 +1,7 @@
 <script setup lang="ts">
   const emit = defineEmits(['submit'])
   const props = defineProps({
+    // eslint-disable-next-line vue/require-default-prop
     modelValue: Object,
     submitLabel: { type: String, default: 'Guardar' }
   })
@@ -11,7 +12,7 @@
     const notification = useNotification()
     if (!form.title?.trim()) {
       notification.validationError('The title is required')
-      
+
       return
     }
     emit('submit', form)

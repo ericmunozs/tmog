@@ -8,6 +8,7 @@ export default defineNuxtConfig({
     '@nuxt/ui',
     '@nuxt/image',
     '@pinia/nuxt',
+    '@nuxt/test-utils/module'
   ],
   css: ['~/assets/css/main.css'],
   ssr: true,
