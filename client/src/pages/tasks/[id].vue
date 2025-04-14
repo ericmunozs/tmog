@@ -5,8 +5,8 @@
   
   const store = useTasksStore()
   const route = useRoute()
-  const notification = useNotification()
-  const id = Number(route.params.id)
+  const notification = useNotifications()
+  const id = String(route.params.id)
 
   await store.fetchTask(id)
 
@@ -16,7 +16,11 @@
       notification.updated()
       navigateTo('/')
     } catch (error) {
-      toast.add({ title: 'Error updating task', description: error.message, color: 'red' })
+      if (error instanceof Error) {
+        notification.error(error.message)
+      } else {
+        notification.error('An unexpected error occurred')
+      }
     }
   }
 </script>

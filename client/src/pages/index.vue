@@ -2,6 +2,7 @@
 <script setup lang="ts">
 
   import { useTasksStore } from '@/store/tasks'
+  import type { DropdownMenuItem, TableColumn } from '@nuxt/ui'
   const store = useTasksStore()
   const notification = useNotification()
   const isLoading = ref(true)
@@ -35,7 +36,7 @@
     ]
   }
 
-  const columns: TableColumn<Payment>[] = [
+  const columns: TableColumn<Task>[] = [
     {
       accessorKey: 'title',
       header: 'Title',
@@ -52,29 +53,31 @@
 </script>
 
 <template>
-  <UTable :data="store.tasks" :columns="columns" :loading="isLoading" loading-color="primary" loading-animation="carousel">
-    <template #name-cell="{ row }">
-      <div class="flex items-center gap-3">
-        <div>
-          <p class="font-bold text-(--ui-text-highlighted)">
-            {{ row.original.title }}
-          </p>
-          <p class="font-medium">
-            {{ row.original.description }}
-          </p>
+  <div>
+    <UTable :data="store.tasks" :columns="columns" :loading="isLoading" loading-color="primary" loading-animation="carousel">
+      <template #name-cell="{ row }">
+        <div class="flex items-center gap-3">
+          <div>
+            <p class="font-bold text-(--ui-text-highlighted)">
+              {{ row.original.title }}
+            </p>
+            <p class="font-medium">
+              {{ row.original.description }}
+            </p>
+          </div>
         </div>
-      </div>
-    </template>
-    <template #action-cell="{ row }">
-      <UDropdownMenu :items="getDropdownActions(row.original)">
-        <UButton
-          icon="i-lucide-ellipsis-vertical"
-          color="neutral"
-          variant="ghost"
-          aria-label="Actions"
-        />
-      </UDropdownMenu>
-    </template>
-  </UTable>
-  <UButton label="New task" class="mt-4" @click="$router.push('/tasks/new-task')" />
+      </template>
+      <template #action-cell="{ row }">
+        <UDropdownMenu :items="getDropdownActions(row.original)">
+          <UButton
+            icon="i-lucide-ellipsis-vertical"
+            color="neutral"
+            variant="ghost"
+            aria-label="Actions"
+          />
+        </UDropdownMenu>
+      </template>
+    </UTable>
+    <UButton label="New task" class="mt-4" @click="$router.push('/tasks/new-task')" />
+  </div>
 </template>

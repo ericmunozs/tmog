@@ -3,7 +3,6 @@
   import { useTasksStore } from '@/store/tasks'
 
   const store = useTasksStore()
-  const toast = useToast()
   const notification = useNotification()
 
   const create = async (data: Task) => {
@@ -12,7 +11,11 @@
       notification.created()
       navigateTo('/')
     } catch (error) {
-      toast.add({ title: 'Error creating task', description: error.message, color: 'red' })
+      if (error instanceof Error) {
+        notification.error(error.message)
+      } else {
+        notification.error('Error creating task')
+      }
     }
   }
 </script>

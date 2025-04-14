@@ -1,28 +1,32 @@
 import { defineStore } from 'pinia'
-import * as api from '@/services/tasks'
 
 export const useTasksStore = defineStore('tasks', {
   state: () => ({
-    tasks: [] as api.Task[],
-    selectedTask: null as api.Task | null
+    tasks: [] as Task[],
+    selectedTask: null as Task | null
   }),
   actions: {
     async fetchTasks() {
-      this.tasks = await api.getTasks()
+      const { getTasks } = useTaskService()
+      this.tasks = await getTasks()
     },
-    async fetchTask(id: number) {
-      this.selectedTask = await api.getTask(id)
+    async fetchTask(id: string) {
+      const { getTask } = useTaskService()
+      this.selectedTask = await getTask(id)
     },
-    async create(task: Partial<api.Task>) {
-      return api.createTask(task)
+    async create(task: Partial<Task>) {
+      const { createTask } = useTaskService()
+      return await createTask(task)
     },
-    async update(id: number, task: Partial<api.Task>) {
-      const updated = await api.updateTask(id, task)
+    async update(id: string, task: Partial<Task>) {
+      const { updateTask } = useTaskService()
+      const updated = await updateTask(id, task)
       const index = this.tasks.findIndex(t => t.id === id)
       if (index !== -1) this.tasks[index] = updated
     },
-    async remove(id: number) {
-      await api.deleteTask(id)
+    async remove(id: string) {
+      const { deleteTask } = useTaskService()
+      await deleteTask(id)
       this.tasks = this.tasks.filter(t => t.id !== id)
     }
   }

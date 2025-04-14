@@ -12,6 +12,12 @@ export default defineNuxtConfig({
   ],
   css: ['~/assets/css/main.css'],
   ssr: true,
+  runtimeConfig: {
+    public: {
+      apiBaseUrl: process.env.API_BASE_URL || 'http://localhost:3001',
+      useMockService: process.env.USE_MOCK_SERVICE || 'false',
+    },
+  }
   // extends:[
   //       '~/layers/task-list'
   //     ]

@@ -1,9 +1,17 @@
+import cors from 'cors'
 import express from 'express'
-import taskRoutes from './infrastructure/routes/task.routes'
 import { errorMiddleware } from './infrastructure/middlewares/error.middleware'
+import taskRoutes from './infrastructure/routes/task.routes'
 
 const app = express()
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT || 3001
+
+app.use(
+  cors({
+    origin: 'http://localhost:3000',
+  })
+)
+
 
 app.use(express.json())
 app.use('/api', taskRoutes)
